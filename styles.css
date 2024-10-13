@@ -75,3 +75,18 @@ th {
     background-color: #555;
     color: #f4f4f4;
 }
+
+span.desc::after {
+    content: " \2B06";
+    color: green;
+}
+
+span.asc::after {
+    content: " \2B07";
+    color: red;
+}
+
+span.default::after {
+    content: "⧩";
+    color: black;
+}

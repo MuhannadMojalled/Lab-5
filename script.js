@@ -458,8 +458,6 @@ function populateTable() {
         <td>${player.points}</td>
         <td>${player.rebounds}</td>
         <td>${player.assists}</td>
-        <td>${player.blocks}</td>
-        <td>${player.turnovers}</td>
     `;
         playerRows.appendChild(playerRow);
     });
@@ -497,3 +495,63 @@ teamFilter.addEventListener("change", () => {
     })
 }
 );
+
+let table = document.querySelector('table');
+let ascending = true;
+
+
+const tableHeads = document.querySelectorAll("th");
+tableHeads.forEach(head => {
+    head.addEventListener("click", () => {
+        let colIndex = head.cellIndex;
+        const rows = table.querySelectorAll('tr');
+        let headerRow = document.querySelector('thead');
+        let rowsArray = [];
+        // here the loop starts from 1 to skip the first row for the header
+        for (let i = 1; i < rows.length; i++) {
+            rowsArray.push(rows[i]);
+        }
+        // Sort the rows
+        rowsArray.sort((a, b) => {
+            let aVal = a.cells[colIndex].innerText;
+            let bVal = b.cells[colIndex].innerText;
+
+            if (aVal < bVal) {
+                return ascending ? -1 : 1;
+            }
+            if (aVal > bVal) {
+                return ascending ? 1 : -1;
+            }
+            return 0;
+        });
+        // update the arrow icon
+        if (ascending) {
+            head.children[0].className = "desc";
+        } else {
+            head.children[0].className = "asc";
+        }
+        // Toggle the ascending variable
+        ascending = !ascending;
+        // delete and recreate the table
+        table.innerHTML = "";
+        table.appendChild(headerRow);
+        rowsArray.forEach(row => table.appendChild(row));
+    });
+});
+
+const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase().trim(); // Convert input to lowercase and remove spaces
+    const rows = document.querySelectorAll("#player-rows tr");
+
+    rows.forEach(row => {
+        const playerName = row.children[0].textContent.toLowerCase(); // Get the player's name in lowercase
+
+        if (playerName.includes(searchTerm)) {
+            row.style.display = ""; // Show row if search term matches
+        } else {
+            row.style.display = "none"; // Hide row if no match
+        }
+    });
+});
