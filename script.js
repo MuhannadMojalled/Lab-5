@@ -507,11 +507,11 @@ tableHeads.forEach(head => {
         const rows = table.querySelectorAll('tr');
         let headerRow = document.querySelector('thead');
         let rowsArray = [];
-        // here the loop starts from 1 to skip the first row for the header
+
         for (let i = 1; i < rows.length; i++) {
             rowsArray.push(rows[i]);
         }
-        // Sort the rows
+
         rowsArray.sort((a, b) => {
             let aVal = a.cells[colIndex].innerText;
             let bVal = b.cells[colIndex].innerText;
@@ -542,16 +542,16 @@ tableHeads.forEach(head => {
 const searchInput = document.getElementById("search");
 
 searchInput.addEventListener("input", () => {
-    const searchTerm = searchInput.value.toLowerCase().trim(); // Convert input to lowercase and remove spaces
+    const searchTerm = searchInput.value.toLowerCase().trim();
     const rows = document.querySelectorAll("#player-rows tr");
 
     rows.forEach(row => {
-        const playerName = row.children[0].textContent.toLowerCase(); // Get the player's name in lowercase
+        const playerName = row.children[0].textContent.toLowerCase();
 
         if (playerName.includes(searchTerm)) {
-            row.style.display = ""; // Show row if search term matches
+            row.style.display = "";
         } else {
-            row.style.display = "none"; // Hide row if no match
+            row.style.display = "none";
         }
     });
 });
