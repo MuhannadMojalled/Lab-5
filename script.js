@@ -449,9 +449,10 @@ toggleStyleBtn.addEventListener("click", () => {
 })
 
 const playerRows = document.getElementById("player-rows");
-data.forEach(player => {
-    const playerRow = document.createElement("tr");
-    playerRow.innerHTML = `
+function populateTable() {
+    data.forEach(player => {
+        const playerRow = document.createElement("tr");
+        playerRow.innerHTML = `
         <td>${player.name}</td>
         <td>${player.team}</td>
         <td>${player.points}</td>
@@ -460,9 +461,10 @@ data.forEach(player => {
         <td>${player.blocks}</td>
         <td>${player.turnovers}</td>
     `;
-    playerRows.appendChild(playerRow);
-});
-
+        playerRows.appendChild(playerRow);
+    });
+}
+populateTable();
 var teams = [];
 data.forEach(player => {
     if (!teams.includes(player.team)) {
@@ -478,3 +480,20 @@ teams.forEach(team => {
     teamFilter.appendChild(option);
 
 })
+
+teamFilter.addEventListener("change", () => {
+    document.querySelectorAll("#player-rows tr").forEach(row => {
+        if (teamFilter.value == "all") {
+            row.style.display = "";
+        }
+        else {
+            if (row.children[1].textContent === teamFilter.value) {
+                row.style.display = "";
+            }
+            else {
+                row.style.display = "none";
+            }
+        }
+    })
+}
+);
