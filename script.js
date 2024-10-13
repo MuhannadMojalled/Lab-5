@@ -447,3 +447,34 @@ const toggleStyleBtn = document.getElementById("dark-mode-toggle")
 toggleStyleBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
 })
+
+const playerRows = document.getElementById("player-rows");
+data.forEach(player => {
+    const playerRow = document.createElement("tr");
+    playerRow.innerHTML = `
+        <td>${player.name}</td>
+        <td>${player.team}</td>
+        <td>${player.points}</td>
+        <td>${player.rebounds}</td>
+        <td>${player.assists}</td>
+        <td>${player.blocks}</td>
+        <td>${player.turnovers}</td>
+    `;
+    playerRows.appendChild(playerRow);
+});
+
+var teams = [];
+data.forEach(player => {
+    if (!teams.includes(player.team)) {
+        teams.push(player.team);
+    }
+});
+
+const teamFilter = document.getElementById("team-filter");
+teams.forEach(team => {
+    var option = document.createElement("option");
+    option.value = team;
+    option.textContent = team;
+    teamFilter.appendChild(option);
+
+})
