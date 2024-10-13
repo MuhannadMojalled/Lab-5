@@ -68,3 +68,10 @@ th {
 .dark-mode td {
     border-color: #555;
 }
+
+.dark-mode button,
+.dark-mode input,
+.dark-mode select {
+    background-color: #555;
+    color: #f4f4f4;
+}

@@ -442,8 +442,8 @@ const data = [
     }
 ];
 
+const toggleStyleBtn = document.getElementById("dark-mode-toggle")
 
-
-
-
-
+toggleStyleBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+})
